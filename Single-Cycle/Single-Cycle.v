@@ -19,7 +19,7 @@ module Single-Cycle(
     single_arm arm(PC, DataAdr, WriteData, MemWrite, clk, Reset, Instr, ReadData);
 
     // External Memories
-    instr_mem imem(Instr, PC);
-    data_mem dmem(ReadData, clk, MemWrite, DataAdr, WriteData);
+    instr_memory imem(Instr, PC);
+    data_memory dmem(ReadData, clk, MemWrite, DataAdr, WriteData);
 
 endmodule

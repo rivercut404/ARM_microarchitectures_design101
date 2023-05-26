@@ -1,6 +1,7 @@
 module datapath(
     output reg [31:0] PC,  // Certainly reg
-    output wire [31:0] ALUResult,  // Certainly wire
+    // Certainly wire
+    output wire [31:0] ALUResult,  
     output wire [3:0] ALUFlags,
     output wire [31:0] WriteData,
     input wire clk, Reset,
@@ -24,7 +25,6 @@ module datapath(
     // 32bit ALU 
     ALU_32bit alu (ALUResult, ALUFlags, ALUCtrl, SrcA, SrcB);
 
-    /*** Is a distinct wire for PC needed? ***/
     assign PCPlus4 = PC + 4;
     assign PCPlus8 = PCPlus4 + 4;
 
@@ -41,7 +41,7 @@ module datapath(
         end
 
     // Register File logics 
-    RegisterFile rf (RD1, RD2, clk, Reset, RegWrite, RA1, RA2, Instr[15:12], Result, PCPlus8);
+    register_file rf (RD1, RD2, clk, Reset, RegWrite, RA1, RA2, Instr[15:12], Result, PCPlus8);
     /***
     module RegisterFile (
         output reg [31:0] RD1, 
@@ -54,5 +54,5 @@ module datapath(
     ***/
 
     // Extend logics 
-    Extend ext (ExtImm, Instr[23:0], ImmSrc);
+    extend ext (ExtImm, Instr[23:0], ImmSrc);
 endmodule
