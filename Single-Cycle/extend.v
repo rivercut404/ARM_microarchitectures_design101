@@ -14,5 +14,7 @@ module Extend(
                 DP : ExtImm = {24'b0, Instr[7:0]};
                 MEM : ExtImm = {20'b0, Instr[11:0]};
                 B : ExtImm = {{6{Instr[23]}}, Instr[23:0], 2'b00};
+            endcase
+        end
 
 endmodule 
