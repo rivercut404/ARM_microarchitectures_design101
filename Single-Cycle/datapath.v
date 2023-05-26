@@ -1,9 +1,8 @@
 module datapath(
-    output reg [31:0] PC,
-    // output reg [31:0] SrcA, SrcB,
-    output reg [31:0] ALUResult,
-    output reg [3:0] ALUFlags,
-    output reg [31:0] WriteData,
+    output reg [31:0] PC,  // Certainly reg
+    output wire [31:0] ALUResult,  // Certainly wire
+    output wire [3:0] ALUFlags,
+    output wire [31:0] WriteData,
     input wire clk, Reset,
     // Inputs from external memory
     input wire [31:0] Instr,
