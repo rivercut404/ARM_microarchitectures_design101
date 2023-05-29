@@ -1,3 +1,11 @@
+`timescale 1ns/1ps
+
+`include "mux_2to1_4bit.v"
+`include "mux_2to1_32bit.v"
+`include "ALU_32bit.v"
+`include "register_file.v"
+`include "extend.v"
+
 module datapath(
     output reg [31:0] PC,  // Certainly reg
     // Certainly wire
@@ -9,7 +17,7 @@ module datapath(
     input wire [31:0] Instr,
     input wire [31:0] ReadData,    
     // Control signals
-    input wire PCSrc, MemtoReg, ALUSrc, RegWrite,
+    input wire PCSrc, RegWrite, MemtoReg, ALUSrc, 
     input wire [1:0] ALUCtrl, RegSrc, ImmSrc
 );
 
@@ -49,8 +57,7 @@ module datapath(
         input wire clk, Reset, 
         input wire RegWrite, 
         input wire [3:0] A1, A2, A3,
-        input wire [31:0] WD3, R15 
-    );
+        input wire [31:0] WD3, R15 );
     ***/
 
     // Extend logics 

@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module decoder(
         output wire PCS, RegW, MemW, NoWrite,
         output wire MemtoReg, ALUSrc,
@@ -11,7 +13,7 @@ module decoder(
     
     PC_logic pcl (PCS, Rd, Branch, RegW);
     
-    main_decoder main_dec (RegW, MemW, MemtoReg, ALUSrc, ImmSrc, RegSrc, Branch, ALUOp, Op, Funct);
+    main_decoder main_dec (RegW, MemW, MemtoReg, ALUSrc, RegSrc, ImmSrc, Branch, ALUOp, Op, Funct);
     
     ALU_decoder alu_dec (NoWrite, ALUCtrl, FlagW, Funct[4:0], ALUOp);    
     
@@ -22,7 +24,8 @@ module PC_logic(
     output wire PCS, 
     input wire [3:0] Rd,
     input wire Branch,
-    input wire RegW);
+    input wire RegW
+);
     
     // Implementation of PC Logic in Decoder
     assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
@@ -33,10 +36,11 @@ endmodule
 module main_decoder(
     // Declare outputs as reg for a procedural assignment
     output reg RegW, MemW, MemtoReg, ALUSrc, 
-    output reg [1:0] ImmSrc, RegSrc, 
+    output reg [1:0] RegSrc, ImmSrc,  
     output reg Branch, ALUOp, 
     input wire [1:0] Op,
-    input wire [5:0] Funct);
+    input wire [5:0] Funct
+);
     
     parameter DP = 2'b00,
               Mem = 2'b01,
@@ -46,6 +50,7 @@ module main_decoder(
     always @ (Op, Funct)
         begin
             case (Op)
+                // Set the control signals: RegW, MemW, MemtoReg, ALUSrc, RegSrc, ImmSrc, Branch, ALUOp
                 DP: if (Funct[5] == 1'b0) 
                         begin  // DP Reg 
                             Branch = 1'b0; MemtoReg = 1'b0; MemW = 1'b0; ALUSrc = 1'b0; RegW = 1'b1; RegSrc = 2'b00; ALUOp = 1'b1;

@@ -1,10 +1,12 @@
+`timescale 1ns/1ps
+
+// `include "mux_2to1_32bit.v"
+
 module ALU_32bit(
     output wire [31:0] Result, 
     output wire [3:0] ALUFlags,
-    // output wire Cout, 
     input wire [1:0] ALUCtrl,
     input wire [31:0] A, B
-    // input wire Cin
 );
 
     wire [31:0] Bn, SrcB, Sum, G, P;
@@ -58,6 +60,6 @@ module mux_4to1_32bit(
                (Sel == 2'b01) ? B :
                (Sel == 2'b10) ? C :
                (Sel == 2'b11) ? D :
-               {32{1'bX}};
+               {32'bX};
 
 endmodule

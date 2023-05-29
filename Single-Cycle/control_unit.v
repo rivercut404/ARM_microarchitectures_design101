@@ -1,3 +1,8 @@
+`timescale 1ns/1ps
+
+`include "decoder.v" 
+`include "conditional_logic.v"
+
 module control_unit(
         // Outputs from conditional logic
         output wire PCSrc, RegWrite, MemWrite,  // Should not be reg

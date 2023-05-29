@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module conditional_logic(
     output reg PCSrc,
     output reg RegWrite,
@@ -19,8 +21,8 @@ module conditional_logic(
                 begin Flags <= 4'b0000; end
             else  // postive edge triggered 
                 begin  // Update flags when FlagW & CondEx enabled (CMPEQ!!!)
-                    if (FlagW[1]&CondEx == 1'b1) Flags[3:2] <= ALUFlags[3:2];  // N, Z
-                    if (FlagW[0]&CondEx == 1'b1) Flags[1:0] <= ALUFlags[1:0];  // C, V
+                    if (FlagW[1] & CondEx) Flags[3:2] <= ALUFlags[3:2];  // N, Z
+                    if (FlagW[0] & CondEx) Flags[1:0] <= ALUFlags[1:0];  // C, V
                 end
         end 
     
@@ -44,7 +46,8 @@ module conditional_logic(
         begin
             PCSrc = PCS & CondEx;
             RegWrite = RegW & CondEx & (~NoWrite);
-            MemWrite = MemWrite & CondEx;
+            MemWrite = MemW & CondEx;
+            // $display("");
         end 
 
 endmodule

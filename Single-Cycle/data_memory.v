@@ -1,28 +1,22 @@
+`timescale 1ns/1ps
+
 module data_memory(
-    input wire clk, Reset, WE,
-    input wire [31:0] addr, WD,
-    output reg [31:0] RD
+    output wire [31:0] RD,
+    input wire clk, WE,
+    input wire [31:0] addr, WD
 );
-    integer i;
+
     reg [31:0] RAM [63:0];
 
     // Memory read
     assign RD = RAM[addr[31:2]];
 
     // Memory write
-    always @ (posedge clk, negedge Reset) 
+    always @ (posedge clk) 
         begin 
-            if (!Reset) 
+            if (WE) 
                 begin 
-                    for (i=0; i<64; i=i+1) 
-                        begin RAM[i] = 32'h0000; end
-                end
-            else
-                begin 
-                    if (WE) 
-                        begin 
-                            RAM[addr[31:2]] <= WD;
-                        end
+                    RAM[addr[31:2]] <= WD;
                 end
         end
 

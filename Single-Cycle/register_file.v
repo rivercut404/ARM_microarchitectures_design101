@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module register_file (
     output reg [31:0] RD1, 
     output reg [31:0] RD2, 

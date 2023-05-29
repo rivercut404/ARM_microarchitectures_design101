@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module mux_2to1_4bit(
     output wire [3:0] F, 
     input wire [3:0] A, B, 
