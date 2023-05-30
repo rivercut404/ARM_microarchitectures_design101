@@ -40,7 +40,7 @@ module register_file (
     
     always @ (A2) 
         begin 
-            if (A1 == 15) 
+            if (A2 == 15) 
                 RD2 = R15;
             else               
                 RD2 = register_set[A2]; 
