@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 
 `include "multicycle_arm.v"
-`include "./../Single-Cycle/instr_memory.v"
-`include "./../Single-Cycle/data_memory.v"
+`include "./../instr_memory.v"
+`include "./../data_memory.v"
 
 module multicycle_top(
     output wire [31:0] WriteData, DataAdr, 
