@@ -7,11 +7,11 @@
 module single_cycle(
     output wire [31:0] WriteData, DataAdr, 
     output wire MemWrite,
-    output wire [31:0] exe_instr,  // for simulation
+    output wire [31:0] exe_instr, PC,  // for simulation
     input wire clk, Reset 
 );
 
-    wire [31:0] PC, Instr, ReadData;
+    wire [31:0] Instr, ReadData;  // PC
 
     assign exe_instr = Instr;
     

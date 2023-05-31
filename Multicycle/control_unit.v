@@ -12,8 +12,6 @@ module control_unit(
     output wire ALUSrcA, 
     output wire [1:0] ALUSrcB, ImmSrc, RegSrc,
     output wire [1:0] ALUCtrl,
-    // for debugging 
-    output wire ALUOp,
     input wire clk, Reset, 
     input wire [3:0] Cond, ALUFlags, 
     input wire [1:0] Op,
@@ -25,7 +23,7 @@ module control_unit(
     wire PCS, RegW, MemW, NextPC;
 
     multicycle_decoder dec(PCS, RegW, MemW, IRWrite, NextPC, AdrSrc, ALUSrcA, ALUSrcB, ResultSrc,
-                           ALUCtrl, FlagW, NoWrite, RegSrc, ImmSrc, ALUOp, clk, Reset, Op, Funct, Rd);
+                           ALUCtrl, FlagW, NoWrite, RegSrc, ImmSrc, clk, Reset, Op, Funct, Rd);
     // module multicycle_decoder(
     // output wire PCS,
     // // Register enables 

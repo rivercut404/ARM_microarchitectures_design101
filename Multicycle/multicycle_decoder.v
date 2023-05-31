@@ -14,15 +14,13 @@ module multicycle_decoder(
     output wire NoWrite,
     // Produced by Instr_Decoder 
     output wire [1:0] RegSrc, ImmSrc, 
-    // for debugging 
-    output wire ALUOp,
     input wire clk, Reset, 
     input wire [1:0] Op,
     input wire [5:0] Funct,
     input wire [3:0] Rd
 );
 
-    wire Branch;  // ALUOp
+    wire Branch, ALUOp;
 
     PC_logic pcl (PCS, Rd, Branch, RegW);
 

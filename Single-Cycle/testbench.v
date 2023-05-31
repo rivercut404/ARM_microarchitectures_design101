@@ -10,15 +10,15 @@ module testbench();
 
     wire [31:0] WriteData, DataAdr;
     wire MemWrite;
-    wire [31:0] Instr;  // for checking the state of sim
+    wire [31:0] Instr, PC;  // for checking the state of sim
 
     reg clk, Reset;
 
-    single_cycle DUT(WriteData, DataAdr, MemWrite, Instr, clk, Reset);
+    single_cycle DUT(WriteData, DataAdr, MemWrite, Instr, PC, clk, Reset);
 
     initial begin
-        Reset = 1;
-        #12 Reset = 0;
+        Reset = 0;
+        #12 Reset = 1;
     end
 
     initial begin
@@ -46,6 +46,7 @@ module testbench();
     // check the simultion goes well 
     always @(Instr)
         begin
+            $display("PC: %h", PC);
             $display("Executing Instr.: %h", Instr);
         end
 
